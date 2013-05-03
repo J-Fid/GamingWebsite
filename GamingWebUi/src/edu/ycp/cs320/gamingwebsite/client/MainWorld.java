@@ -47,42 +47,43 @@ public class MainWorld extends Composite{
 	private NumberLabel<Double> numberLabel;
 	private ImageElement img2;
 	private  LayoutPanel layoutPanel;
-	//private loginView loginview;
 
 	private double dx;
 	private double dy;
 	private Button scoresbtn;
 	private Button membtn;
 	private MemView memview; 
-	//private Button btnLogOff;
 	
 	public MainWorld(){
+
+		
 		this.dx = 0;
 		this.dy = 0;
-	
+
 		memview = new MemView();
 		
 		MAX_KEYS = 256;
 		keys = new boolean[MAX_KEYS];
 		canvas = Canvas.createIfSupported();
-		//this.player = new Player();
+	
 		if (canvas == null) {
 			return;
 		}
-	
+
 		layoutPanel = new LayoutPanel();
 		initWidget(layoutPanel);
-	
-		layoutPanel.setSize("1125px", "890px");
-	
-	
+		layoutPanel.setSize("1174px", "918px");
+
+
+
+
 		// Use a FocusPanel to allow the canvas to process user input events
 		FocusPanel focusPanel = new FocusPanel();
 		layoutPanel.add(focusPanel);
-	
-		layoutPanel.setWidgetLeftWidth(focusPanel, 0.0, Unit.PX, 923.0, Unit.PX);
+
+		layoutPanel.setWidgetLeftWidth(focusPanel, 0.0, Unit.PX, 960.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(focusPanel, 0.0, Unit.PX, 705.0, Unit.PX);
-	
+
 		canvas.setSize("951px", "698px");
 		
 		canvas.setCoordinateSpaceWidth(width);
@@ -90,22 +91,19 @@ public class MainWorld extends Composite{
 		canvas.setFocus(true);
 		
 		focusPanel.add(canvas);
-	
+
 		numberLabel = new NumberLabel<Double>();
 		numberLabel.setStyleName("Main Game");
 		layoutPanel.add(numberLabel);
 		
-		layoutPanel.setWidgetLeftWidth(numberLabel, 0.0, Unit.PX, 144.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(numberLabel, 0.0, Unit.PX, 34.0, Unit.PX);
+		
 		layoutPanel.setWidgetLeftWidth(numberLabel, 0.0, Unit.PX, 153.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(numberLabel, 0.0, Unit.PX, 23.0, Unit.PX);
-	
+
 		numberLabel_1 = new NumberLabel<Double>();
 		numberLabel_1.setStyleName("Main Game");
 		layoutPanel.add(numberLabel_1);
 		
-		layoutPanel.setWidgetLeftWidth(numberLabel_1, 0.0, Unit.PX, 144.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(numberLabel_1, 46.0, Unit.PX, 29.0, Unit.PX);
 	
 		layoutPanel.setWidgetLeftWidth(numberLabel_1, 0.0, Unit.PX, 153.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(numberLabel_1, 46.0, Unit.PX, 23.0, Unit.PX);
@@ -119,8 +117,8 @@ public class MainWorld extends Composite{
 			}
 		});
 		layoutPanel.add(membtn);
-		layoutPanel.setWidgetLeftWidth(membtn, 929.0, Unit.PX, 124.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(membtn, 158.0, Unit.PX, 73.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(membtn, 890.0, Unit.PX, 117.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(membtn, 153.0, Unit.PX, 64.0, Unit.PX);
 		
 		scoresbtn = new Button("Enter Score Table");
 		scoresbtn.addClickHandler(new ClickHandler() {
@@ -128,34 +126,21 @@ public class MainWorld extends Composite{
 			}
 		});
 		layoutPanel.add(scoresbtn);
-		layoutPanel.setWidgetLeftWidth(scoresbtn, 929.0, Unit.PX, 124.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(scoresbtn, 248.0, Unit.PX, 64.0, Unit.PX);
-		
-//		btnLogOff = new Button("Log off");
-//		btnLogOff.addClickHandler(new ClickHandler() {
-//			public void onClick(ClickEvent event) {
-////				layoutPanel.clear();
-////				layoutPanel.add(loginview);
-//				
-//			}
-//		});
-//		layoutPanel.add(btnLogOff);
-//		layoutPanel.setWidgetLeftWidth(btnLogOff, 929.0, Unit.PX, 107.0, Unit.PX);
-//		layoutPanel.setWidgetTopHeight(btnLogOff, 15.0, Unit.PX, 36.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(scoresbtn, 890.0, Unit.PX, 117.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(scoresbtn, 246.0, Unit.PX, 64.0, Unit.PX);
 		
 		
-	
+
 		canvas.addKeyDownHandler(new KeyDownHandler(){
 			public void onKeyDown(KeyDownEvent event) {
 				int key = event.getNativeKeyCode();
 				if(key < MAX_KEYS) {
-					GWT.log("KEY " + key);
 					keys[key] = true;
 					timer.scheduleRepeating(5);
 				}
 			}
 		});
-	
+
 		
 		canvas.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
@@ -165,40 +150,45 @@ public class MainWorld extends Composite{
 				}
 			}
 		});
-	
+
 		player = new Player();
-	
+		
+		timer = new Timer(){
+			@Override
+			public void run(){
+				update();
+			}
+		};
+		timer.scheduleRepeating(5);
+		
+		membtn.setVisible(false);
+		scoresbtn.setVisible(false);
 		
 		render();
 		
-		timer = new Timer(){
-			  @Override
-			  public void run(){
-				  update();
-			  }
-		  };
-		  timer.scheduleRepeating(5);
-		membtn.setVisible(false);
-		scoresbtn.setVisible(false);
-
 	}
 
 	public void render(){
 		context = canvas.getContext2d();
 		context.beginPath();
-		// drawing the image background
+		
+		
 		img = (ImageElement) new Image("CardImage/Mainworld.jpg").getElement().cast();
+		// drawing the image
 		context.drawImage(img, 0, 0, 1000, 800);
-	
+		
 		img2 = (ImageElement) new Image("CardImage/manlymen.jpg").getElement().cast();
-		// drawing the image player
+		// drawing the image
 		context.drawImage(img2, player.getX(), player.getY(), 60, 50);
 		context.closePath();
+		//   context.fill();
 	}
 
 	public void update(){		 
 		 dx = 0;
 		 dy = 0;
+
+
 
 		double x = player.getX();
 		double y = player.getY();
@@ -219,11 +209,14 @@ public class MainWorld extends Composite{
 		if(keys[83]) {
 			dy = 1;
 		}
+
 		
 		//x = 360 reached the left side of the right buildings, y = 40 for top of screen
 				//y = 415 for top of bottom buildings, x = 610 for the right of screen
 				//y = 290 for bottom of top buildings, y = 590 for bottom of screen,x = 20 for the left of screen
 				//x = 260 for the right side of the left buildings
+		
+
 		x += dx;
 		y += dy;
 		
@@ -251,12 +244,15 @@ public class MainWorld extends Composite{
 			}
 		}
 
+
 		render();
 
-//		numberLabel.setValue(x);
-//		numberLabel.setVisible(true);
-//
-//		numberLabel_1.setValue(y);
-//		numberLabel_1.setVisible(true);
+		numberLabel.setValue(x);
+		numberLabel.setVisible(true);
+
+		numberLabel_1.setValue(y);
+		numberLabel_1.setVisible(true);
 	}
+
 }
+

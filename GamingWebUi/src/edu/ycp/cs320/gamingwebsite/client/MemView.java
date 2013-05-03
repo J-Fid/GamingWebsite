@@ -49,47 +49,59 @@ public class MemView extends Composite {
 		private Button pg;
 		private NumberLabel<Double> scorelabl;
 		private double score; 
+		private LayoutPanel layoutPanel_1;
+		private Button btnBackToHome;
 
 		
 	
 	public MemView() {
 		
-		final LayoutPanel layoutPanel = new LayoutPanel();
-		initWidget(layoutPanel);
+		layoutPanel_1 = new LayoutPanel();
+		initWidget(layoutPanel_1);
 
 		this.score = 0;  
-
-		layoutPanel.setSize("798px", "571px");
+		layoutPanel_1.setSize("1033px", "617px");
 		
 		// winning label to the game.
 		WinLabel = new InlineLabel("CONGRATULATIONS! YOU WON!");
 		WinLabel.setStyleName("BigMeassage");
 		WinLabel.setDirectionEstimator(true);
 		WinLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		layoutPanel.add(WinLabel);
-		layoutPanel.setWidgetLeftWidth(WinLabel, 167.0, Unit.PX, 488.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(WinLabel, 118.0, Unit.PX, 94.0, Unit.PX);
+		layoutPanel_1.add(WinLabel);
+		layoutPanel_1.setWidgetLeftWidth(WinLabel, 167.0, Unit.PX, 488.0, Unit.PX);
+		layoutPanel_1.setWidgetTopHeight(WinLabel, 118.0, Unit.PX, 94.0, Unit.PX);
 		
 		// play again button
 		pg = new Button("Play again button");
 		pg.addClickHandler(new ClickHandler() {	
 			public void onClick(ClickEvent event) {
-				makeDeck(layoutPanel);
+				makeDeck(layoutPanel_1);
 			}
 		});
 		pg.setStyleName("Playagain_button");
 		pg.setText("Play again?");
-		layoutPanel.add(pg);
-		layoutPanel.setWidgetRightWidth(pg, 323.0, Unit.PX, 118.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(pg, 293.0, Unit.PX, 58.0, Unit.PX);
+		layoutPanel_1.add(pg);
+		layoutPanel_1.setWidgetRightWidth(pg, 540.0, Unit.PX, 118.0, Unit.PX);
+		layoutPanel_1.setWidgetTopHeight(pg, 292.0, Unit.PX, 58.0, Unit.PX);
 		
 		scorelabl = new NumberLabel<Double>();
 		scorelabl.setStyleName("score");
-		layoutPanel.add(scorelabl);
-		layoutPanel.setWidgetLeftWidth(scorelabl, 322.0, Unit.PX, 161.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(scorelabl, 218.0, Unit.PX, 45.0, Unit.PX);
+		layoutPanel_1.add(scorelabl);
+		layoutPanel_1.setWidgetLeftWidth(scorelabl, 322.0, Unit.PX, 161.0, Unit.PX);
+		layoutPanel_1.setWidgetTopHeight(scorelabl, 218.0, Unit.PX, 45.0, Unit.PX);
 		
-		makeDeck(layoutPanel);
+		makeDeck(layoutPanel_1);
+		
+		btnBackToHome = new Button("Back to Home Screen");
+		btnBackToHome.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				goHome();
+			}
+		});
+		btnBackToHome.setStyleName("label");
+		layoutPanel_1.add(btnBackToHome);
+		layoutPanel_1.setWidgetLeftWidth(btnBackToHome, 779.0, Unit.PX, 107.0, Unit.PX);
+		layoutPanel_1.setWidgetTopHeight(btnBackToHome, 0.0, Unit.PX, 83.0, Unit.PX);
 	}
 	
 	// so that it can remake the deck and reset the game
@@ -341,5 +353,11 @@ public class MemView extends Composite {
 		else{
 			return false; 
 		}
+	}
+	public void goHome(){
+		MainWorld main = new MainWorld();
+		layoutPanel_1.clear();
+		layoutPanel_1.add(main);
+		main.update();
 	}
 }

@@ -4,8 +4,6 @@ package edu.ycp.cs320.gamingwebsite.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 
-import edu.ycp.cs320.gamingwebsite.shared.IPublisher;
-import edu.ycp.cs320.gamingwebsite.shared.ISubscriber;
 import edu.ycp.cs320.gamingwebsite.shared.Login;
 
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -18,7 +16,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 
-public class loginView extends Composite implements ISubscriber{
+public class loginView extends Composite /*implements ISubscriber*/{
 	private TextBox usernameTextBox;
 	private Label errorLabel;
 	private LayoutPanel layoutPanel;
@@ -144,10 +142,5 @@ public class loginView extends Composite implements ISubscriber{
 		layoutPanel.clear();
 		layoutPanel.add(main); 
 		main.update();
-	}
-
-	@Override
-	public void eventOccured(Object key, IPublisher publisher, Object hint) {
-		handleLogInClicked();
 	}
 }

@@ -12,6 +12,9 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
  */
 public class GamingWebUi implements EntryPoint {
 	loginView view;
+	MainWorld view2;
+
+
 	/**
 	 * This is the entry point method.
 	 */
@@ -22,6 +25,8 @@ public class GamingWebUi implements EntryPoint {
 		RootLayoutPanel.get().setWidgetTopBottom(view, 0.0, Unit.PX, 0.0, Unit.PX);
 		RootLayoutPanel.get().setWidgetLeftRight(view, 0.0, Unit.PX, 0.0, Unit.PX);
 	} 
+	
+	
 	
 	}
 

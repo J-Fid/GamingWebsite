@@ -16,11 +16,6 @@ public class Player {
 		this.y = 350;
 		this.dx = 0;
 		this.dy = 0;
-		Up = false;
-		down = false;
-		left = false;
-		right = false;
-		enter = false;
 	}
 	
 	public double getX() {
@@ -39,28 +34,8 @@ public class Player {
 		this.y = y;
 	}
 	
-	public void setDirection(boolean up, boolean down, boolean left, boolean right){
-		this.Up = up;
-		this.down = down;
-		this.left = left;
-		this.right = right;
-	}
 	
-	public boolean getUp() {
-		return Up;
-	}
-	
-	public boolean getdown() {
-		return down;
-	}
-	
-	public boolean getleft() {
-		return left;
-	}
-	
-	public boolean getright() {
-		return right;
-	}
+
 	/**
 	 * This method returns true if the player is about to enter a room
 	 * @return true if about to answer, else false
@@ -78,5 +53,6 @@ public class Player {
 			return false;
 		}
 			
-	}
-}
+	}}
+	 
+

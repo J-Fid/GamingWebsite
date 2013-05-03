@@ -18,7 +18,13 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 	
 	@Override
 	public Login addLogin(String username, String password) {
-		return DBUtil.instance().addLogin(username, password);
+		try {
+			return DBUtil.instance().addLogin(username, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
