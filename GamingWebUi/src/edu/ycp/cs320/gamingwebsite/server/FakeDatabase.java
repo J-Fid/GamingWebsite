@@ -50,4 +50,9 @@ public class FakeDatabase implements IDatabase {
 		return login;
 	}
 
+	@Override
+	public Login setscore(double score) throws SQLException {
+		return null;
+	}
+
 }

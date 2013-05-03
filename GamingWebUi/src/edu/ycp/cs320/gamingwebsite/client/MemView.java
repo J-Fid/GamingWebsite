@@ -3,16 +3,19 @@ package edu.ycp.cs320.gamingwebsite.client;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Image;
 import edu.ycp.cs320.gamingwebsite.shared.*;
+
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.NumberLabel;
 
 
@@ -51,6 +54,7 @@ public class MemView extends Composite {
 		private double score; 
 		private LayoutPanel layoutPanel_1;
 		private Button btnBackToHome;
+		private Label errorLabel;
 
 		
 	
@@ -102,6 +106,11 @@ public class MemView extends Composite {
 		layoutPanel_1.add(btnBackToHome);
 		layoutPanel_1.setWidgetLeftWidth(btnBackToHome, 779.0, Unit.PX, 107.0, Unit.PX);
 		layoutPanel_1.setWidgetTopHeight(btnBackToHome, 0.0, Unit.PX, 83.0, Unit.PX);
+		
+		errorLabel = new Label("New label");
+		layoutPanel_1.add(errorLabel);
+		layoutPanel_1.setWidgetLeftWidth(errorLabel, 23.0, Unit.PX, 56.0, Unit.PX);
+		layoutPanel_1.setWidgetTopHeight(errorLabel, 599.0, Unit.PX, 18.0, Unit.PX);
 	}
 	
 	// so that it can remake the deck and reset the game
@@ -359,5 +368,27 @@ public class MemView extends Composite {
 		layoutPanel_1.clear();
 		layoutPanel_1.add(main);
 		main.update();
+	}
+	
+	protected void handleLogInClicked() {
+		// RPC call to server to see if username/password is valid
+		
+//		RPC.scoreService.setscore(score, new AsyncCallback<Login>() {
+//
+//			@Override
+//			public void onSuccess(Login result) {
+//				if (result == null) {
+//					errorLabel.setText("No such username/password");
+//				} else {
+//					errorLabel.setText("Success (should go to home page)" );
+//				}
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				//  display error (e.g., in a label)
+//				errorLabel.setText("Error logging in (could not contact server)");
+//			}
+//		});
 	}
 }

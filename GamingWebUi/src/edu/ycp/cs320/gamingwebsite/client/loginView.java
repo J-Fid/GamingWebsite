@@ -16,7 +16,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 
-public class loginView extends Composite /*implements ISubscriber*/{
+public class loginView extends Composite{
 	private TextBox usernameTextBox;
 	private Label errorLabel;
 	private LayoutPanel layoutPanel;
