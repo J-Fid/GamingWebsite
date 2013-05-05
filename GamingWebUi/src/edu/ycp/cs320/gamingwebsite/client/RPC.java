@@ -6,6 +6,6 @@ public class RPC {
 	public static final LoginServiceAsync loginService =
 			GWT.create(LoginService.class);
 	
-//	public static final ScoreServiceAsync scoreService =
-//			GWT.create(ScoreService.class);
+	public static final ScoreServiceAsync scoreService =
+			GWT.create(ScoreService.class);
 }

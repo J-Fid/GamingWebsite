@@ -181,12 +181,11 @@ public class Database implements IDatabase{
 						login.setPassword(password);
 						
 						stmt = conn.prepareStatement(
-								"insert into logins (username, password, memscore) values (?, ?, ?)",
+								"insert into logins (username, password) values (?, ?)",
 								PreparedStatement.RETURN_GENERATED_KEYS
 						);
 						stmt.setString(1, username);
 						stmt.setString(2, password);
-						stmt.setInt(3, 0);
 						
 						stmt.executeUpdate();
 						
@@ -223,7 +222,7 @@ public class Database implements IDatabase{
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 
-						stmt.setDouble(3, score);
+						stmt.setDouble(1, score);
 						
 						stmt.executeUpdate();
 						

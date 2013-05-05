@@ -224,7 +224,8 @@ public class MemView extends Composite {
 		CardsShown();
 		
 		if(IsFinished()){
-		score = (10/(click/2)) *100; 
+			score = (10/(click/2)) *100;
+			setscore(); 
 			new Timer() {
 				@Override
 				public void run() {
@@ -235,8 +236,6 @@ public class MemView extends Composite {
 					
 				}
 			}.schedule(500);
-	
-			
 		}
 		else{
 			scorelabl.setVisible(false);
@@ -336,8 +335,6 @@ public class MemView extends Composite {
 				final int hideIndex2 = imgindex2;
 				
 				if(samecards == true){
-					allImages[imgindex1].setVisible(false);
-					allImages[imgindex2].setVisible(false);
 					new Timer() {
 						@Override
 						public void run() {
@@ -370,25 +367,25 @@ public class MemView extends Composite {
 		main.update();
 	}
 	
-	protected void handleLogInClicked() {
+	protected void setscore() {
 		// RPC call to server to see if username/password is valid
 		
-//		RPC.scoreService.setscore(score, new AsyncCallback<Login>() {
-//
-//			@Override
-//			public void onSuccess(Login result) {
-//				if (result == null) {
-//					errorLabel.setText("No such username/password");
-//				} else {
-//					errorLabel.setText("Success (should go to home page)" );
-//				}
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				//  display error (e.g., in a label)
-//				errorLabel.setText("Error logging in (could not contact server)");
-//			}
-//		});
+		RPC.scoreService.setscore(score, new AsyncCallback<Login>() {
+
+			@Override
+			public void onSuccess(Login result) {
+				if (result == null) {
+					errorLabel.setText("No such username/password");
+				} else {
+					errorLabel.setText("Success (should go to home page)" );
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				//  display error (e.g., in a label)
+				errorLabel.setText("Error logging in (could not contact server)");
+			}
+		});
 	}
 }

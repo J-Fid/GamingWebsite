@@ -15,6 +15,9 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.FileUpload;
+import com.google.gwt.event.logical.shared.AttachEvent.Handler;
+import com.google.gwt.event.logical.shared.AttachEvent;
 
 public class loginView extends Composite{
 	private TextBox usernameTextBox;
@@ -22,6 +25,15 @@ public class loginView extends Composite{
 	private LayoutPanel layoutPanel;
 	private MainWorld main; 
 	private PasswordTextBox passwordTextBox;
+	private Button create;
+	private Button Canel;
+	private LayoutPanel layoutPanel_1;
+	private TextBox textBox;
+	private PasswordTextBox passwordTextBox_1;
+	private Label lblPassword_1;
+	private Label lblUserName_1;
+	private Button btnNewButton;
+	private Button NewUser;
 
 
 	
@@ -31,8 +43,15 @@ public class loginView extends Composite{
 		initWidget(layoutPanel);
 		layoutPanel.setSize("1000px", "800px");
 		
+		layoutPanel_1 = new LayoutPanel();
+		layoutPanel.add(layoutPanel_1);
+		layoutPanel.setWidgetLeftWidth(layoutPanel_1, 92.0, Unit.PX, 400.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(layoutPanel_1, 21.0, Unit.PX, 415.0, Unit.PX);
+		layoutPanel_1.setVisible(false);
+		
+		
 		// logining into the website
-		Button btnNewButton = new Button("Sign in");
+		btnNewButton = new Button("Sign in");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				handleLogInClicked();
@@ -44,12 +63,12 @@ public class loginView extends Composite{
 		layoutPanel.setWidgetLeftWidth(btnNewButton, 162.0, Unit.PX, 81.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(btnNewButton, 284.0, Unit.PX, 30.0, Unit.PX);
 		
-		Label lblPassword = new Label("Password :");
+		final Label lblPassword = new Label("Password :");
 		layoutPanel.add(lblPassword);
 		layoutPanel.setWidgetLeftWidth(lblPassword, 124.0, Unit.PX, 68.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(lblPassword, 213.0, Unit.PX, 34.0, Unit.PX);
 		
-		Label lblUserName = new Label("User Name :");
+		final Label lblUserName = new Label("User Name :");
 		layoutPanel.add(lblUserName);
 		layoutPanel.setWidgetLeftWidth(lblUserName, 124.0, Unit.PX, 81.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(lblUserName, 153.0, Unit.PX, 18.0, Unit.PX);
@@ -73,7 +92,7 @@ public class loginView extends Composite{
 		layoutPanel.setWidgetTopHeight(errorLabel, 341.0, Unit.PX, 23.0, Unit.PX);
 		
 		// creating new account
-		Button NewUser = new Button("Sign up");
+		NewUser = new Button("Sign up");
 		NewUser.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				handleSignInClicked();
@@ -87,7 +106,6 @@ public class loginView extends Composite{
 		layoutPanel.add(passwordTextBox);
 		layoutPanel.setWidgetLeftWidth(passwordTextBox, 219.0, Unit.PX, 173.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(passwordTextBox, 213.0, Unit.PX, 32.0, Unit.PX);
-		// init
 	}
 	
 	protected void handleLogInClicked() {
@@ -133,8 +151,6 @@ public class loginView extends Composite{
 					
 				}
 			}
-			
-			
 		});
 	}
 	
