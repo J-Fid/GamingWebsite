@@ -13,5 +13,5 @@ public interface IDatabase {
 	
 	public Login addLogin(String username, String password) throws SQLException;
 	
-	public Login setscore(final double score) throws SQLException;
+	public void setscore(String username, double score) throws SQLException;
 }

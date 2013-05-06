@@ -158,8 +158,4 @@ public class loginView extends Composite{
 	public String getUsernameTextBox() {
 		return usernameTextBox.getText();
 	}
-	
-	public String getPasswordTextBox() {
-		return passwordTextBox.getText();
-	}
 }

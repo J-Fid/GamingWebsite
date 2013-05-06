@@ -55,14 +55,15 @@ public class MemView extends Composite {
 		private LayoutPanel layoutPanel_1;
 		private Button btnBackToHome;
 		private Label errorLabel;
-
+		private Login login;
 		
 	
 	public MemView() {
 		
 		layoutPanel_1 = new LayoutPanel();
 		initWidget(layoutPanel_1);
-
+		login = new Login();
+		
 		this.score = 0;  
 		layoutPanel_1.setSize("1033px", "617px");
 		
@@ -226,7 +227,7 @@ public class MemView extends Composite {
 		if(IsFinished()){
 			score = (10/(click/2)) *100;
 			
-			setscore(score); 
+			setscore(); 
 			
 			new Timer() {
 				@Override
@@ -251,8 +252,6 @@ public class MemView extends Composite {
 	 */
 	public void render(){
 		//make two decks of memcards and store in a new array
-		
-		
 		deck.make();
 		score = 0; 
 		click = 0;
@@ -369,17 +368,16 @@ public class MemView extends Composite {
 		main.update();
 	}
 	
-	protected void setscore(double score) {
+	protected void setscore() {
 		// RPC call to server to see if username/password is valid
 		
-		RPC.loginService.setscore(score, new AsyncCallback<Login>() {
+		RPC.loginService.setscore(login.getUser(), score, new AsyncCallback<Void>() {
 
 			@Override
-			public void onSuccess(Login result) {
+			public void onSuccess(Void result) {
 				if (result == null) {
 					errorLabel.setText("No such username/password");
 				} else {
-					System.out.println(result.getMemscore());
 					errorLabel.setText("Success (should go to home page)" );
 				}
 			}

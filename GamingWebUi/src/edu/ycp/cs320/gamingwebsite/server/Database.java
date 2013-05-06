@@ -209,37 +209,40 @@ public class Database implements IDatabase{
 		}
 	}
 	
-	public Login setscore(final double score) throws SQLException {
-		return databaseRun(new ITransaction<Login>() {
+	public void setscore(final String username, final double score) throws SQLException {
+		databaseRun(new ITransaction<Boolean>() {
 			@Override
-			public Login run(Connection conn) throws SQLException {
+			public Boolean run(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet keys = null;
 
 				try {
-					Login login = new Login();
-					loginView view = new loginView();
-					login.setMemscore(score);
-					login.setUserName(view.getUsernameTextBox());
-					login.setPassword(view.getPasswordTextBox());
+					//Login login = new Login();
+					//loginView view = new loginView();
+					//login.setMemscore(score);
+					//login.setUserName(view.getUsernameTextBox());
+					//login.setPassword(view.getPasswordTextBox());
 					
 					stmt = conn.prepareStatement("update logins " +
 							" set memscore = ?" +
-							" where username = login.username AND password = login.password"
+							" where username = ? " +  // FIXME: security issue
+							"   and ? > memscore"     // only update score if new score is higher
 							);
-					stmt.executeQuery();
+					//stmt.executeQuery();
 					
 					stmt.setDouble(1, score);
+					stmt.setString(2,  username);
+					stmt.setDouble(3, score);
 					
 					stmt.executeUpdate();
 					
-					keys = stmt.getGeneratedKeys();
+					/*keys = stmt.getGeneratedKeys();
 					if (!keys.next()) {
 						throw new SQLException("Can't happen: no generated key for inserted login");
 					}
-					login.setId(keys.getInt(1));
+					login.setId(keys.getInt(1));*/
 
-					return login;
+					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt);
 					DBUtil.closeQuietly(keys);

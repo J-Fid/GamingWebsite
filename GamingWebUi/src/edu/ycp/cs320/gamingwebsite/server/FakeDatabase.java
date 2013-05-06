@@ -51,8 +51,8 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public Login setscore(double score) throws SQLException {
-		return null;
+	public void setscore(String username, double score) throws SQLException {
+		
 	}
 
 }

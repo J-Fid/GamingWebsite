@@ -11,5 +11,5 @@ public interface LoginService extends RemoteService {
 	
 	public Login addLogin(String username, String password);
 
-	public Login setscore(double score);
+	public void setscore(String username, double score);
 }
