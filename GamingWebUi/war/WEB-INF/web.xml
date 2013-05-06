@@ -10,15 +10,6 @@
     <url-pattern>/gamingwebui/login</url-pattern>
   </servlet-mapping>
   
-    <servlet>
-    <servlet-name>MemScoreServiceImpl</servlet-name>
-    <servlet-class>edu.ycp.cs320.gamingwebsite.server.MemScoreServiceImpl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemScoreServiceImpl</servlet-name>
-    <url-pattern>/gamingwebui/login</url-pattern>
-  </servlet-mapping>
-  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>GamingWebUi.html</welcome-file>

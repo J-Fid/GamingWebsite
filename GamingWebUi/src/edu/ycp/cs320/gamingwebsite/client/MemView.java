@@ -225,7 +225,9 @@ public class MemView extends Composite {
 		
 		if(IsFinished()){
 			score = (10/(click/2)) *100;
-			setscore(); 
+			
+			setscore(score); 
+			
 			new Timer() {
 				@Override
 				public void run() {
@@ -367,16 +369,17 @@ public class MemView extends Composite {
 		main.update();
 	}
 	
-	protected void setscore() {
+	protected void setscore(double score) {
 		// RPC call to server to see if username/password is valid
 		
-		RPC.scoreService.setscore(score, new AsyncCallback<Login>() {
+		RPC.loginService.setscore(score, new AsyncCallback<Login>() {
 
 			@Override
 			public void onSuccess(Login result) {
 				if (result == null) {
 					errorLabel.setText("No such username/password");
 				} else {
+					System.out.println(result.getMemscore());
 					errorLabel.setText("Success (should go to home page)" );
 				}
 			}

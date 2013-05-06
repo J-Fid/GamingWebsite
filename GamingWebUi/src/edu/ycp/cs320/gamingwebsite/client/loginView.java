@@ -25,13 +25,7 @@ public class loginView extends Composite{
 	private LayoutPanel layoutPanel;
 	private MainWorld main; 
 	private PasswordTextBox passwordTextBox;
-	private Button create;
-	private Button Canel;
 	private LayoutPanel layoutPanel_1;
-	private TextBox textBox;
-	private PasswordTextBox passwordTextBox_1;
-	private Label lblPassword_1;
-	private Label lblUserName_1;
 	private Button btnNewButton;
 	private Button NewUser;
 
@@ -147,6 +141,7 @@ public class loginView extends Composite{
 				if(result == null){
 					errorLabel.setText("No can not create");
 				} else {
+					System.out.println(result.getUser() + result.getPassword() + result.getMemscore());
 					errorLabel.setText("Created New User");
 					
 				}
@@ -158,5 +153,13 @@ public class loginView extends Composite{
 		layoutPanel.clear();
 		layoutPanel.add(main); 
 		main.update();
+	}
+	
+	public String getUsernameTextBox() {
+		return usernameTextBox.getText();
+	}
+	
+	public String getPasswordTextBox() {
+		return passwordTextBox.getText();
 	}
 }

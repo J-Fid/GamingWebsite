@@ -11,5 +11,6 @@ public interface LoginServiceAsync {
 
 	void addLogin(String username, String password,
 			AsyncCallback<Login> callback);
-
+	
+	void setscore(double score, AsyncCallback<Login> callback);
 }

@@ -8,5 +8,5 @@ import edu.ycp.cs320.gamingwebsite.shared.Login;
 @RemoteServiceRelativePath("login")
 public interface ScoreService extends RemoteService{
 	
-	public Login setscore(double score);
+//	public Login setscore(double score);
 }

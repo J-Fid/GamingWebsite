@@ -6,6 +6,6 @@ import edu.ycp.cs320.gamingwebsite.shared.Login;
 
 public interface ScoreServiceAsync {
 
-	void setscore(double score, AsyncCallback<Login> callback);
+//	void setscore(double score, AsyncCallback<Login> callback);
 
 }

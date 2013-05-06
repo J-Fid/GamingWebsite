@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ycp.cs320.gamingwebsite.client.loginView;
 import edu.ycp.cs320.gamingwebsite.shared.*;
 
 public class Database implements IDatabase{
@@ -93,7 +94,8 @@ public class Database implements IDatabase{
 							"create table logins (" +
 							"  id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
 							"  username VARCHAR(200) NOT NULL, " +
-							"  password VARCHAR(200) NOT NULL " +
+							"  password VARCHAR(200) NOT NULL, " +
+							"  memscore DOUBLE " +
 							")"
 					);
 					
@@ -128,6 +130,7 @@ public class Database implements IDatabase{
 						login.setId(resultSet.getInt(1));
 						login.setUserName(resultSet.getString(2));
 						login.setPassword(resultSet.getString(3));
+						login.setMemscore(resultSet.getDouble(4));
 
 						result.add(login);
 					}
@@ -215,24 +218,28 @@ public class Database implements IDatabase{
 
 				try {
 					Login login = new Login();
+					loginView view = new loginView();
 					login.setMemscore(score);
+					login.setUserName(view.getUsernameTextBox());
+					login.setPassword(view.getPasswordTextBox());
 					
-					stmt = conn.prepareStatement("select * from logins where " +"username = ?" 
-							+ "insert into logins (memsore) values (?)",
-							PreparedStatement.RETURN_GENERATED_KEYS
+					stmt = conn.prepareStatement("update logins " +
+							" set memscore = ?" +
+							" where username = login.username AND password = login.password"
 							);
+					stmt.executeQuery();
+					
+					stmt.setDouble(1, score);
+					
+					stmt.executeUpdate();
+					
+					keys = stmt.getGeneratedKeys();
+					if (!keys.next()) {
+						throw new SQLException("Can't happen: no generated key for inserted login");
+					}
+					login.setId(keys.getInt(1));
 
-						stmt.setDouble(1, score);
-						
-						stmt.executeUpdate();
-						
-						keys = stmt.getGeneratedKeys();
-						if (!keys.next()) {
-							throw new SQLException("Can't happen: no generated key for inserted login");
-						}
-						login.setId(keys.getInt(1));
-
-						return login;
+					return login;
 				} finally {
 					DBUtil.closeQuietly(stmt);
 					DBUtil.closeQuietly(keys);

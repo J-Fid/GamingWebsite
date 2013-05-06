@@ -27,4 +27,15 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 		return null;
 	}
 
+	@Override
+	public Login setscore(double score) {
+		try {
+			return DBUtil.instance().setscore(score);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

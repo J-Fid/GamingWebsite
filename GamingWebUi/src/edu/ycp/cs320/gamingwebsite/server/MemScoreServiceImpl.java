@@ -11,15 +11,15 @@ import edu.ycp.cs320.gamingwebsite.shared.Login;
 public class MemScoreServiceImpl extends RemoteServiceServlet implements
 		ScoreService {
 
-	@Override
-	public Login setscore(double score) {
-		try {
-			return DBUtil.instance().setscore(score);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	@Override
+//	public Login setscore(double score) {
+//		try {
+//			return DBUtil.instance().setscore(score);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
 }
