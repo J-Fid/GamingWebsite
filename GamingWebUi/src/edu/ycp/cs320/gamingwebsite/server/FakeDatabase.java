@@ -22,6 +22,7 @@ public class FakeDatabase implements IDatabase {
 		
 		loginList.add(user1);
 		loginList.add(user2);
+		loginList.add(0, user2);
 	}
 
 	@Override
